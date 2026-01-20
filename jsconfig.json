@@ -1,7 +1,6 @@
 {
   "compilerOptions": {
-    "paths": {
-      "cursoDevInfra/*": ["./infra/*"]
-    }
+    "baseUrl": ".",
+    "ignoreDeprecations": "6.0"
   }
 }
