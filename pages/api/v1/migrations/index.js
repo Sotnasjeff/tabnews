@@ -5,6 +5,8 @@ import database from "infra/database.js";
 export default async function migrations(request, response) {
   const dbClient = await database.getNewClient();
 
+  const allowedMethods = ["GET", "POST"];
+
   const defaultMigrationOption = {
     dbClient: dbClient,
     dryRun: true,
@@ -13,6 +15,12 @@ export default async function migrations(request, response) {
     verbose: true,
     migrationsTable: "pgmigrations",
   };
+
+  if (!allowedMethods.includes(request.method)) {
+    return response.status(405).json({
+      message: "Method Now Allowed",
+    });
+  }
 
   if (request.method === "GET") {
     const pendingMigration = await migrationRunner(defaultMigrationOption);
