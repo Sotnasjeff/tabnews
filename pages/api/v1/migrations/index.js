@@ -21,17 +21,17 @@ export default async function migrations(request, response) {
   }
 
   if (request.method === "POST") {
-    const migratedMigrations = await migrationRunner({
+    const migratedMigration = await migrationRunner({
       ...defaultMigrationOption,
       dryRun: false,
     });
 
     await dbClient.end();
 
-    if (migratedMigrations.length > 0) {
-      return response.status(201).json(migratedMigrations);
+    if (migratedMigration.length > 0) {
+      return response.status(201).json(migratedMigration);
     }
-    response.status(200).json(migratedMigrations);
+    response.status(200).json(migratedMigration);
   }
 
   return response.status(405).end();
