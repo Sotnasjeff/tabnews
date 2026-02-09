@@ -15,7 +15,8 @@
     "test:watch:get": "npm run test:watch -- migrations.get",
     "test:watch:post": "npm run test:watch -- migrations.post",
     "migration:create": "node-pg-migrate --migrations-dir infra/migrations create",
-    "migration:up": "node-pg-migrate --migrations-dir infra/migrations --envPath .env.development up "
+    "migration:up": "node-pg-migrate --migrations-dir infra/migrations --envPath .env.development up ",
+    "curl:watch": "watch -n 1 curl -s 'https://mytabnewsclone.com.br/api/v1/status | jq'"
   },
   "author": "",
   "license": "MIT",
