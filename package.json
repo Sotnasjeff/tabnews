@@ -11,7 +11,7 @@
     "lint:check": "prettier --check .",
     "lint:fix": "prettier --write .",
     "test": "npm run services:up && concurrently --names next,jest --hide next -k -s command-jest \"next dev\" \"jest --runInBand --verbose\"",
-    "test:watch": "npm run services:up && concurrently --names jest,next --hide next 'next dev' 'jest --watchAll --runInBand'",
+    "test:watch": "jest --watchAll --runInBand'",
     "test:watch:get": "npm run test:watch -- migrations.get",
     "test:watch:post": "npm run test:watch -- migrations.post",
     "migration:create": "node-pg-migrate --migrations-dir infra/migrations create",
