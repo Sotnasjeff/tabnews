@@ -1,9 +1,8 @@
-import database from "infra/database.js";
 import orchestrator from "tests/orchestrator.js";
 
 beforeAll(async () => {
   await orchestrator.waitForAllServices();
-  await database.query("DROP SCHEMA PUBLIC CASCADE; CREATE SCHEMA PUBLIC");
+  await orchestrator.clearDatabase();
 });
 
 describe("POST to /api/v1/migrations", () => {
@@ -23,13 +22,6 @@ describe("POST to /api/v1/migrations", () => {
         expect(Array.isArray(responseBody)).toBe(true);
         expect(responseBody.length).toBe(1);
         expect(responseBody[0].name).toBe("1770090104664_test-migration");
-
-        const responseQueryAfterMigration = await database.query(
-          "SELECT 1+1 AS result_sum;",
-        );
-        expect(responseQueryAfterMigration.rowCount).toBe(1);
-        expect(responseQueryAfterMigration.rows[0].result_sum).toBe(2);
-        expect(responseBody.length).toBeGreaterThan(0);
       });
       test("For the second time", async () => {
         const response2 = await fetch(
