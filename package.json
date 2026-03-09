@@ -6,6 +6,7 @@
     "dev": "node dev.js",
     "dev:services": "npm run services:up && npm run services:wait:database && npm run migrations:up && next dev",
     "test": "npm run services:up && concurrently -n next,jest --hide next -k -s command-jest \"next dev\" \"jest --runInBand --verbose\"",
+    "posttest": "npm run services:stop",
     "test:watch": "jest --watchAll --runInBand'",
     "test:watch:get": "npm run test:watch -- migrations.get",
     "test:watch:post": "npm run test:watch -- migrations.post",
