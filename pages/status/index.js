@@ -18,13 +18,17 @@ export default function StatusPage() {
 }
 
 function UpdatedAt() {
-  const fetch = useSWR("/api/v1/status", fetchStatus, {
+  const { data, isLoading } = useSWR("/api/v1/status", fetchStatus, {
     refreshInterval: 2000,
   });
 
-  const updatedAt = new Date(fetch.data.updated_at).toLocaleString("pt-BR");
+  if (isLoading) {
+    return <p>Carregando...</p>;
+  }
 
-  return <p>Última Atualização: {updatedAt}</p>;
+  const updatedAtText = new Date(data.updated_at).toLocaleString("pt-BR");
+
+  return <p>Última Atualização: {updatedAtText}</p>;
 }
 
 function DatabaseStatus() {
