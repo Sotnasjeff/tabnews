@@ -10,9 +10,25 @@ async function fetchStatus(key) {
 export default function StatusPage() {
   return (
     <>
+      <h1>Status</h1>
+      <UpdatedAt />
       <DatabaseStatus />
     </>
   );
+}
+
+function UpdatedAt() {
+  const { data, isLoading } = useSWR("/api/v1/status", fetchStatus, {
+    refreshInterval: 2000,
+  });
+
+  if (isLoading) {
+    return <p>Carregando...</p>;
+  }
+
+  const updatedAtText = new Date(data.updated_at).toLocaleString("pt-BR");
+
+  return <p>Última Atualização: {updatedAtText}</p>;
 }
 
 function DatabaseStatus() {
@@ -37,18 +53,17 @@ function DatabaseStatus() {
 
   return (
     <>
-      <h1>Status</h1>
-      <h2>Atualização: {new Date(data.updated_at).toLocaleString("pt-BR")}</h2>
-      <p>
+      <h1>Banco de Dados</h1>
+      <div>
         <b>Versão do Banco de Dados:</b> {database_version}
-      </p>
-      <p>
+      </div>
+      <div>
         <b>Máximo de conexões:</b> {max_connections}
-      </p>
-      <p>
+      </div>
+      <div>
         <b>Conexões Abertas:</b>
         {opened_connections}
-      </p>
+      </div>
     </>
   );
 }
