@@ -8,10 +8,13 @@ beforeAll(async () => {
 describe("GET to /api/v1/migrations", () => {
   describe("Anonymous user", () => {
     test("retrieving pending migrations", async () => {
-      const response = await fetch("http://localhost:3000/api/v1/migrations");
+      const response = await fetch("http://localhost:3000/api/v1/migrations", {
+        method: "GET",
+      });
       expect(response.status).toBe(200);
 
       const responseBody = await response.json();
+      console.log(responseBody);
 
       expect(Array.isArray(responseBody)).toBe(true);
       expect(responseBody.length).toBeGreaterThan(0);
