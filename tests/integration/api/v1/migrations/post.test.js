@@ -21,7 +21,7 @@ describe("POST to /api/v1/migrations", () => {
 
         expect(Array.isArray(responseBody)).toBe(true);
         expect(responseBody.length).toBe(1);
-        expect(responseBody[0].name).toBe("1770090104664_test-migration");
+        expect(responseBody[0].name).toBe("1774267391762_create-users");
       });
       test("For the second time", async () => {
         const response2 = await fetch(
