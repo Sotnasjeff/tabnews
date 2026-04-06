@@ -24,7 +24,7 @@ exports.up = (pgm) => {
       notNull: true,
       default: pgm.func("timezone('utc', now())"),
     },
-    update_at: {
+    updated_at: {
       type: "timestamptz",
       notNull: true,
       default: pgm.func("timezone('utc', now())"),
