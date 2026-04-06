@@ -62,8 +62,6 @@ async function create(userInputValues) {
 async function update(username, userInputValues) {
   const currentUser = await findOneByUsername(username);
 
-  console.log("USUARIO ATUAL " + currentUser.username);
-
   if ("username" in userInputValues) {
     await validateUsername(userInputValues.username);
   }
@@ -105,8 +103,6 @@ async function runUpdateQuery(userWithNewValues) {
     ],
   });
 
-  console.log(results.rows[0]);
-
   return results.rows[0];
 }
 
@@ -121,8 +117,6 @@ async function validateUsername(username) {
             ;`,
     values: [username],
   });
-
-  console.log("FOUND USERNAME:" + results.rows[0]);
 
   if (results.rowCount > 0) {
     throw new ValidationError({
