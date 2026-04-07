@@ -34,6 +34,7 @@ async function findOneByUsername(username) {
 async function create(userInputValues) {
   await validateUsername(userInputValues.username);
   await validateUniqueEmail(userInputValues.email);
+  await validatePassword(userInputValues.password);
   await hashPassword(userInputValues);
 
   const newUser = await runInsertQuery(userInputValues);
@@ -104,6 +105,15 @@ async function runUpdateQuery(userWithNewValues) {
   });
 
   return results.rows[0];
+}
+
+async function validatePassword(password) {
+  if (password === undefined) {
+    throw new ValidationError({
+      message: "O campo password é obrigatório.",
+      action: "Crie uma senha para realizar esta operação.",
+    });
+  }
 }
 
 async function validateUsername(username) {
