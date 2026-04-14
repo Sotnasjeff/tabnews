@@ -1,6 +1,7 @@
 import bcryptjs from "bcryptjs";
 
-const pepper = process.env.PEPPER_PASSWORD || "";
+const pepper =
+  process.env.NODE_ENV === "production" ? process.env.PEPPER_PASSWORD : "";
 
 async function hash(password) {
   const spicedPassword = password + pepper;
