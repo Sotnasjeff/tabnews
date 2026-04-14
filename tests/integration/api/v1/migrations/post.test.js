@@ -20,8 +20,9 @@ describe("POST to /api/v1/migrations", () => {
         const responseBody = await response.json();
 
         expect(Array.isArray(responseBody)).toBe(true);
-        expect(responseBody.length).toBe(1);
+        expect(responseBody.length).toBe(2);
         expect(responseBody[0].name).toBe("1774267391762_create-users");
+        expect(responseBody[1].name).toBe("1776081397743_create-sessions");
       });
       test("For the second time", async () => {
         const response2 = await fetch(
